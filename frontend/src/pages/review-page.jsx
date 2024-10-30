@@ -55,9 +55,6 @@ export default function ReviewPage(props) {
   }
 
   async function handleCardEdit() {
-    console.log(currentCardID);
-    console.log(currentCard._id);
-
     const editedQuestion = document.getElementById("question").value;
     const editedAnswer = document.getElementById("answer").value;
 
@@ -86,13 +83,13 @@ export default function ReviewPage(props) {
           <h1 className="text-2xl font-bold tracking-wide">Review</h1>
 
           <Link to={"/"}>
-            <span className="bg-saitama-red hover:bg-saitama-darker-red self-center rounded-full px-4 py-3 text-lg text-white hover:cursor-pointer">
+            <span className="self-center rounded-full bg-saitama-red px-4 py-3 text-lg text-white hover:cursor-pointer hover:bg-saitama-darker-red">
               &#8592;
             </span>
           </Link>
         </div>
 
-        <div className="bg-saitama-white mt-4 rounded-md p-4">
+        <div className="mt-4 rounded-md bg-saitama-white p-4">
           <div className="flex flex-col justify-center">
             <div className="mt-2 flex justify-between">
               <h2>{cardSubject}</h2>
@@ -113,14 +110,14 @@ export default function ReviewPage(props) {
             <div className="flex justify-center gap-2">
               <span
                 onClick={handleCardChangeMinus}
-                className="bg-saitama-red hover:bg-saitama-darker-red rounded-full px-5 py-2 text-lg text-white hover:cursor-pointer"
+                className="rounded-full bg-saitama-red px-5 py-2 text-lg text-white hover:cursor-pointer hover:bg-saitama-darker-red"
               >
                 &#8249;
               </span>
 
               <span
                 onClick={handleCardChangePlus}
-                className="bg-saitama-red hover:bg-saitama-darker-red rounded-full px-5 py-2 text-lg text-white hover:cursor-pointer"
+                className="rounded-full bg-saitama-red px-5 py-2 text-lg text-white hover:cursor-pointer hover:bg-saitama-darker-red"
               >
                 &#8250;
               </span>

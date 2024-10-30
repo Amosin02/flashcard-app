@@ -1,19 +1,25 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Sets from "../components/sets";
 import Sidebar from "../components/sidebar";
 import { Link } from "react-router-dom";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 export default function WelcomePage(props) {
   const cardDataArr = props.flashcardData;
 
-  function deleteSet(e) {
-    // e.stopImmediatePropagation();
+  async function deleteSet(e) {
     e.preventDefault();
     e.stopPropagation();
     console.log("works");
 
-    // add pop up too
+    try {
+      await axios.delete(
+        `http://localhost:3001/api/flashcards/${props.selectedSetID}`,
+      );
+    } catch (error) {
+      console.log(error);
+    }
+
+    location.reload();
   }
 
   return (
@@ -25,13 +31,13 @@ export default function WelcomePage(props) {
           Your Flashcards
         </h1>
 
-        <div className="bg-saitama-white rounded-md p-4 pr-10">
+        <div className="rounded-md bg-saitama-white p-4 pr-10">
           {cardDataArr &&
             cardDataArr.map((el) => (
               <Link key={el._id} to={"/review-cards"}>
                 <div
-                  className="border-saitama-gold bg-saitama-yellow hover:bg-saitama-darker-yellow m-2 my-4 rounded-md border p-4 shadow-md hover:cursor-pointer"
-                  onClick={() => props.getId(el._id)}
+                  className="m-2 my-4 rounded-md border border-saitama-gold bg-saitama-yellow p-4 shadow-md hover:cursor-pointer hover:bg-saitama-darker-yellow"
+                  onMouseOver={() => props.getId(el._id)}
                 >
                   <Sets
                     subject={el.subject}

@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import Sidebar from "./components/sidebar";
 import CreateFlashcard from "./pages/create-flashcard";
 import axios from "axios";
 import WelcomePage from "./pages/welcome-page";
@@ -13,8 +10,6 @@ function App() {
   const [flashcardCards, setFlashcardCards] = useState();
   const [selectedSetID, setSelectedSetID] = useState();
   const [update, setUpdate] = useState(true);
-
-  let holder = [];
 
   useEffect(() => {
     const getFlashcards = async () => {
@@ -55,10 +50,7 @@ function App() {
     await axios.post("http://localhost:3001/api/flashcards", flashcardData);
   }
 
-  // when you click the create flashcard button, it will go to the home page
-
   function getId(id) {
-    // setFlashcardID(id);
     localStorage.clear();
     flashcardData.map((el) => {
       if (el._id === id) {
@@ -77,7 +69,13 @@ function App() {
         <Route
           exact
           path="/"
-          element={<WelcomePage flashcardData={flashcardData} getId={getId} />}
+          element={
+            <WelcomePage
+              flashcardData={flashcardData}
+              getId={getId}
+              selectedSetID={selectedSetID}
+            />
+          }
         />
         <Route
           exact
