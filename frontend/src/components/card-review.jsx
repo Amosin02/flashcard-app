@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CardEdit from "./card-edit";
+import CardDelete from "./card-delete";
 
 export default function CardReview(props) {
   const [isClicked, setIsClicked] = useState(true);
@@ -18,14 +19,18 @@ export default function CardReview(props) {
       {!isClicked && (
         <>
           <div className="px-4 pt-4">
-            <p className="flex justify-between">
+            <div className="flex justify-between">
               Answer
-              <CardEdit
-                question={props.question}
-                answer={props.answer}
-                handleCardEdit={props.handleCardEdit}
-              />
-            </p>
+              <div>
+                <CardDelete />
+
+                <CardEdit
+                  question={props.question}
+                  answer={props.answer}
+                  handleCardEdit={props.handleCardEdit}
+                />
+              </div>
+            </div>
             <hr className="mt-4 border-t border-black" />
           </div>
           <div
@@ -42,14 +47,18 @@ export default function CardReview(props) {
       {isClicked && (
         <>
           <div className="px-4 pt-4">
-            <p className="flex justify-between">
+            <div className="flex justify-between">
               Question
-              <CardEdit
-                question={props.question}
-                answer={props.answer}
-                handleCardEdit={props.handleCardEdit}
-              />
-            </p>
+              <div className="flex w-12 justify-between">
+                <CardDelete />
+
+                <CardEdit
+                  question={props.question}
+                  answer={props.answer}
+                  handleCardEdit={props.handleCardEdit}
+                />
+              </div>
+            </div>
             <hr className="mt-4 border-t border-black" />
           </div>
           <div

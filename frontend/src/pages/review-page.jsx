@@ -12,8 +12,31 @@ export default function ReviewPage(props) {
   const [cardSubject, setCardSubject] = useState(
     JSON.parse(localStorage.getItem("cardSubject")),
   );
+  const [dataHolder, setDataHolder] = useState();
+  const [setId, setSetId] = useState(JSON.parse(localStorage.getItem("setID")));
 
   let numCount = cardCount;
+
+  useEffect(() => {
+    const getFlashcards = async () => {
+      await axios
+        .get("http://localhost:3001/api/flashcards")
+        .then((res) => setDataHolder(res.data.data));
+    };
+
+    getFlashcards();
+  }, []);
+
+  useEffect(() => {
+    function getCards() {
+      if (dataHolder) {
+        const here = dataHolder.find((el) => el._id === setId);
+        localStorage.setItem("cardData", JSON.stringify(here.cards));
+      }
+    }
+
+    getCards();
+  }, [dataHolder]);
 
   function handleCardChangePlus() {
     if (cardCount === cardSet.length - 1) {
@@ -24,6 +47,7 @@ export default function ReviewPage(props) {
       numCount++;
     }
     changeCard();
+    indexToStorage();
   }
 
   function handleCardChangeMinus() {
@@ -35,6 +59,7 @@ export default function ReviewPage(props) {
       numCount--;
     }
     changeCard();
+    indexToStorage();
   }
 
   function changeCard() {
@@ -50,8 +75,13 @@ export default function ReviewPage(props) {
     setCurrentCardID(holderID);
   }
 
+  function indexToStorage() {
+    localStorage.setItem("idx", JSON.stringify(numCount));
+  }
+
   if (!cardSet.length) {
     getFromStorage();
+    indexToStorage();
   }
 
   async function handleCardEdit() {

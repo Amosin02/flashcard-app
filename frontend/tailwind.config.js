@@ -10,6 +10,7 @@ export default {
         "saitama-darker-red": "#b02322",
         "saitama-gold": "#a98237",
         "saitama-white": "#ede9e8",
+        "saitama-darker-white": "#d5d2d1",
       },
     },
   },

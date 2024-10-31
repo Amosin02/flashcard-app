@@ -80,7 +80,6 @@ router.put('/:flashcardID/cards/:cardID', async (req, res) => {
       { $set: { 'cards.$.question': question, 'cards.$.answer': answer } },
       { new: true }
     );
-    // console.log(flashcardID, cardID);
 
     if (!result) {
       return res.status(404).json({ message: 'Question not found' });
@@ -111,5 +110,29 @@ router.delete('/:id', async (req, res) => {
 });
 
 // delete a certain card in the flashcard
+router.delete('/:flashcardID/cards/:cardID', async (req, res) => {
+  try {
+    const { flashcardID, cardID } = req.params;
+
+    const flashcardObjID = new mongoose.Types.ObjectId(flashcardID);
+    const cardObjID = new mongoose.Types.ObjectId(cardID);
+
+    const cardToBeDeleted = await Flashcard.findOneAndUpdate(
+      {
+        _id: flashcardObjID,
+      },
+      { $pull: { cards: { _id: cardObjID } } },
+      { new: true }
+    );
+
+    if (!cardToBeDeleted) {
+      return res.status(404).json({ message: 'Card Not Found' });
+    }
+
+    return res.status(200).send({ message: 'Card Successfuly Deleted' });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;
