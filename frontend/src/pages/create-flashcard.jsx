@@ -2,6 +2,7 @@ import { useState } from "react";
 import { _ } from "lodash";
 import CardInput from "../components/card-input";
 import Sidebar from "../components/sidebar";
+import { Link } from "react-router-dom";
 
 export default function CreateFlashcard(props) {
   const [cardCount, setCardCount] = useState([{ id: 1 }, { id: 2 }, { id: 3 }]);
@@ -24,7 +25,7 @@ export default function CreateFlashcard(props) {
         <form
           method="post"
           onSubmit={props.handleSubmit}
-          className="bg-saitama-white rounded-md p-4 pr-10"
+          className="rounded-md bg-saitama-white p-4 pr-10"
         >
           <div className="mb-3">
             <label
@@ -34,7 +35,7 @@ export default function CreateFlashcard(props) {
               Title
             </label>
             <input
-              className="bg-saitama-yellow border-saitama-gold rounded-sm border"
+              className="rounded-sm border border-saitama-gold bg-saitama-yellow"
               id="subject"
               name="subject"
               type="text"
@@ -43,7 +44,7 @@ export default function CreateFlashcard(props) {
 
           {cardCount.map((item, number) => (
             <div
-              className="bg-saitama-yellow border-saitama-gold my-2 flex flex-col rounded-md border"
+              className="my-2 flex flex-col rounded-md border border-saitama-gold bg-saitama-yellow"
               key={`${item.id}-${number}`}
             >
               <CardInput
@@ -52,18 +53,18 @@ export default function CreateFlashcard(props) {
               />
             </div>
           ))}
-
-          {/* <div className="mt-2 flex justify-center"> */}
           <button
             onClick={handleCardAdd}
-            className="bg-saitama-red hover:bg-saitama-darker-red active:bg-saitama-darker-red mb-2 h-16 w-full self-center rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none"
+            className="mb-2 h-16 w-full self-center rounded-lg bg-saitama-red px-5 py-2.5 text-sm font-medium text-white hover:bg-saitama-darker-red focus:outline-none active:bg-saitama-darker-red"
           >
             + Add Card
           </button>
-          {/* </div> */}
-          <button className="bg-saitama-red hover:bg-saitama-darker-red active:bg-saitama-darker-red mb-2 rounded-lg px-5 py-2.5 text-sm font-medium text-white focus:outline-none">
-            Create Flashcard
-          </button>
+
+          <Link to={"/"}>
+            <button className="mb-2 rounded-lg bg-saitama-red px-5 py-2.5 text-sm font-medium text-white hover:bg-saitama-darker-red focus:outline-none active:bg-saitama-darker-red">
+              Create Flashcard
+            </button>
+          </Link>
         </form>
       </section>
     </>
