@@ -4,7 +4,7 @@ import axios from "axios";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-export default function CardDelete() {
+export default function CardDelete(props) {
   async function handleDeleteCard() {
     const idxOfCard = JSON.parse(localStorage.getItem("idx"));
     const cards = JSON.parse(localStorage.getItem("cardData"));
@@ -12,20 +12,15 @@ export default function CardDelete() {
     const idOfCard = findIdOfCard(idxOfCard, cards);
     const setID = JSON.parse(localStorage.getItem("setID"));
 
-    // deleteCard(setID, idOfCard);
-
     try {
-      await axios.delete(
-        `http://localhost:3001/api/flashcards/${setID}/cards/${idOfCard}`,
-      );
+      await axios
+        .delete(
+          `http://localhost:3001/api/flashcards/${setID}/cards/${idOfCard}`,
+        )
+        .then(props.handleDeleteRefresh());
     } catch (error) {
       console.log(error);
     }
-    location.reload();
-
-    setTimeout(() => {
-      location.reload();
-    }, 2000);
   }
 
   function findIdOfCard(index, cards) {
@@ -52,10 +47,15 @@ export default function CardDelete() {
 
           <button
             className="h-11 rounded-md border border-saitama-red bg-saitama-red text-white hover:bg-saitama-darker-red"
-            onClick={handleDeleteCard}
+            onClick={() => {
+              handleDeleteCard();
+              close();
+            }}
+            type="submit"
           >
             Delete
           </button>
+
           <button
             className="h-11 rounded-md border border-saitama-red bg-saitama-red text-white hover:bg-saitama-darker-red"
             onClick={close}

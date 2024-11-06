@@ -60,11 +60,9 @@ export default function CreateFlashcard(props) {
             + Add Card
           </button>
 
-          <Link to={"/"}>
-            <button className="mb-2 rounded-lg bg-saitama-red px-5 py-2.5 text-sm font-medium text-white hover:bg-saitama-darker-red focus:outline-none active:bg-saitama-darker-red">
-              Create Flashcard
-            </button>
-          </Link>
+          <button className="mb-2 rounded-lg bg-saitama-red px-5 py-2.5 text-sm font-medium text-white hover:bg-saitama-darker-red focus:outline-none active:bg-saitama-darker-red">
+            Create Flashcard
+          </button>
         </form>
       </section>
     </>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import CreateFlashcard from "./pages/create-flashcard";
 import axios from "axios";
 import WelcomePage from "./pages/welcome-page";
@@ -10,6 +10,7 @@ function App() {
   const [flashcardCards, setFlashcardCards] = useState();
   const [selectedSetID, setSelectedSetID] = useState();
   const [update, setUpdate] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getFlashcards = async () => {
@@ -40,6 +41,7 @@ function App() {
         };
         deck.push(card);
       }
+      navigate("/");
     }
 
     const flashcardData = {

@@ -9,6 +9,15 @@ export default function CardReview(props) {
     setIsClicked((oldState) => !oldState);
   }
 
+  function handleDeleteRefresh() {
+    setTimeout(() => {
+      // console.log("IN");
+      // location.replace("/review-cards");
+      location.reload();
+    }, 2000);
+    // location.reload();
+  }
+
   useEffect(() => {
     setIsClicked(true);
   }, [props.faceDown]);
@@ -22,7 +31,7 @@ export default function CardReview(props) {
             <div className="flex justify-between">
               Answer
               <div>
-                <CardDelete />
+                <CardDelete handleDeleteRefresh={handleDeleteRefresh} />
 
                 <CardEdit
                   question={props.question}
@@ -49,8 +58,8 @@ export default function CardReview(props) {
           <div className="px-4 pt-4">
             <div className="flex justify-between">
               Question
-              <div className="flex w-12 justify-between">
-                <CardDelete />
+              <div className="flex justify-between">
+                <CardDelete handleDeleteRefresh={handleDeleteRefresh} />
 
                 <CardEdit
                   question={props.question}
