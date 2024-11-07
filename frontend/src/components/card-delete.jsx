@@ -4,7 +4,7 @@ import axios from "axios";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-export default function CardDelete(props) {
+export default function CardDelete() {
   async function handleDeleteCard() {
     const idxOfCard = JSON.parse(localStorage.getItem("idx"));
     const cards = JSON.parse(localStorage.getItem("cardData"));
@@ -13,11 +13,9 @@ export default function CardDelete(props) {
     const setID = JSON.parse(localStorage.getItem("setID"));
 
     try {
-      await axios
-        .delete(
-          `http://localhost:3001/api/flashcards/${setID}/cards/${idOfCard}`,
-        )
-        .then(props.handleDeleteRefresh());
+      await axios.delete(
+        `http://localhost:3001/api/flashcards/${setID}/cards/${idOfCard}`,
+      );
     } catch (error) {
       console.log(error);
     }
@@ -40,10 +38,13 @@ export default function CardDelete(props) {
       nestedd
     >
       {(close) => (
-        <div className="m-2 my-4 flex h-44 flex-col gap-3 rounded-md">
+        <div className="m-2 my-4 flex h-48 flex-col gap-3 rounded-md">
           <h1 className="py-2 text-center text-lg font-medium">
             Delete This Card?
           </h1>
+          <p className="text-center text-sm font-light">
+            Please reload the page after deletion
+          </p>
 
           <button
             className="h-11 rounded-md border border-saitama-red bg-saitama-red text-white hover:bg-saitama-darker-red"

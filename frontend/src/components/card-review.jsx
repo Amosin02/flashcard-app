@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import CardEdit from "./card-edit";
 import CardDelete from "./card-delete";
 
@@ -7,15 +7,6 @@ export default function CardReview(props) {
 
   function handleClickFlip() {
     setIsClicked((oldState) => !oldState);
-  }
-
-  function handleDeleteRefresh() {
-    setTimeout(() => {
-      // console.log("IN");
-      // location.replace("/review-cards");
-      location.reload();
-    }, 2000);
-    // location.reload();
   }
 
   useEffect(() => {
@@ -31,7 +22,7 @@ export default function CardReview(props) {
             <div className="flex justify-between">
               Answer
               <div>
-                <CardDelete handleDeleteRefresh={handleDeleteRefresh} />
+                <CardDelete />
 
                 <CardEdit
                   question={props.question}
@@ -59,7 +50,7 @@ export default function CardReview(props) {
             <div className="flex justify-between">
               Question
               <div className="flex justify-between">
-                <CardDelete handleDeleteRefresh={handleDeleteRefresh} />
+                <CardDelete />
 
                 <CardEdit
                   question={props.question}
